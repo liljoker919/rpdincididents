@@ -1,0 +1,4 @@
+https://services.arcgis.com/v400IkDOw1ad7Yad/arcgis/rest/services/Police_Incidents/FeatureServer/0/query?where=district%20%3D%20'PINHEIRAL'&outFields=*&outSR=4326&f=json
+https://services.arcgis.com/v400IkDOw1ad7Yad/arcgis/rest/services/Police_Incidents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json
+
+https://services.arcgis.com/v400IkDOw1ad7Yad/arcgis/rest/services/Police_Incidents/FeatureServer/0/query?where=district%20%3D%20'DOWNTOWN'%20AND%20crime_description%20%3D%20'MISCELLANEOUS%2FALL%20OTHER%20NON-OFFENSES'%20AND%20reported_year%20%3E%3D%202017%20AND%20reported_year%20%3C%3D%202018&outFields=*&outSR=4326&f=json

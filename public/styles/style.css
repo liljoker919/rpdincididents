@@ -1,0 +1,30 @@
+body {
+  background-color: rgba(82, 82, 82, 0.8);
+}
+
+#dataView {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#dataView table tbody{
+  text-align: center;
+}
+
+th {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+}
+
+td {
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 4px;
+}
+
+tr:hover {
+  background-color: red;
+}
