@@ -1,8 +1,9 @@
 const fields = document.getElementById('fields');
+const searchInput = document.getElementById('district-input');
+const searchButton = document.querySelector('.inputs button');
 
 const currentMonth = `${new Date().getMonth() + 1}`;
 const nextMonth = `${new Date().getMonth() + 2}`;
-
 const currentDate = `${new Date().getUTCDate() - 1}`;
  
 const newUrl = `https://services.arcgis.com/v400IkDOw1ad7Yad/arcgis/rest/services/Police_Incidents/FeatureServer/0/query?where=reported_year%20%3E%3D%202020%20AND%20reported_year%20%3C%3D%202022%20AND%20reported_month%20%3E%3D%20${currentMonth}%20AND%20reported_month%20%3C%3D%20${nextMonth}%20AND%20reported_day%20%3E%3D%20${currentDate}%20AND%20reported_day%20%3C%3D%20${currentDate}&outFields=*&outSR=4326&f=json`;
@@ -23,8 +24,9 @@ function formatedTime(timestamp) {
 }
 
 
-function createTR(attributes) { 
-  if(attributes.district === 'North') {
+function createTR(attributes, value) { 
+  console.log(value)
+  if(attributes.district === value) {
 
     const tr = document.createElement('tr');
     const td_crime_description = document.createElement('td');
@@ -68,17 +70,20 @@ function createTR(attributes) {
 }
 
 
-function getData(url) {
+function getData(url, value) {
   fetch(url)
     .then( response => response.json())
     .then( data => {
       for( let field of data.features) {
         const attributes = field.attributes;
-        if(createTR(attributes)) {
-          fields.appendChild((createTR(attributes)));
+        if(createTR(attributes, value)) {
+          fields.appendChild((createTR(attributes, value)));
         }
       }
     })
 }
 
-getData(newUrl);
+searchButton.addEventListener('click', () => {
+  const value = searchInput.value;
+  getData(newUrl, value);
+});
