@@ -23,7 +23,8 @@ function formatedTime(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-function createTR(attributes) {
+
+function createTR(attributes) {  
   const tr = document.createElement('tr');
   const td_crime_description = document.createElement('td');
   const td_district = document.createElement('td');
@@ -31,12 +32,19 @@ function createTR(attributes) {
   const td_reported_date = document.createElement('td');
   const td_reported_time = document.createElement('td');
 
+  let text_reported_block_address = null;
+
+  if(!attributes.reported_block_address) {
+    text_reported_block_address = document.createTextNode('No Block reported');
+  } else {
+    text_reported_block_address = document.createTextNode(attributes.reported_block_address);
+  }
 
   const text_crime_description = document.createTextNode(attributes.crime_description);
   const text_district = document.createTextNode(attributes.district);
-  const text_reported_block_address = document.createTextNode(attributes.reported_block_address);
   const text_reported_date = document.createTextNode(formatedDate(attributes.reported_date));
   const text_reported_time = document.createTextNode(formatedTime(attributes.reported_date));
+
 
   td_crime_description.appendChild(text_crime_description);
   td_district.appendChild(text_district);
@@ -61,9 +69,8 @@ function getData(url) {
     .then( response => response.json())
     .then( data => {
       for( let field of data.features) {
-        console.log(field.attributes)
         const attributes = field.attributes;
-        fields.appendChild(createTR(attributes));
+        fields.appendChild((createTR(attributes)));
       }
     })
 }
