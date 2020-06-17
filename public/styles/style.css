@@ -1,5 +1,5 @@
 body {
-  background-color: rgba(82, 82, 82, 0.8);
+  background-color: rgba(131, 131, 131, 0.8);
 }
 
 #dataView {
@@ -21,10 +21,28 @@ th {
 
 td {
   color: white;
-  border: 1px solid rgb(255, 255, 255);
+  border: 1px solid rgb(153, 153, 153);
   padding: 4px;
 }
 
 tr:hover {
   background-color: red;
+}
+
+.inputs {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.inputs span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.inputs button {
+  padding: 3px 8px;
+  font-weight: bold;
+  border-radius: 4px;
+  border: none;
 }

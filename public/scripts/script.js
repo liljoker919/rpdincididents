@@ -1,6 +1,5 @@
-const fields = document.getElementById('fields');
-const searchInput = document.getElementById('district-input');
-const searchCrime = document.getElementById('crime-description');
+let fields = document.getElementById('fields');
+const searchInput = document.getElementById('search');;
 const searchButton = document.querySelector('.inputs button');
 
 const currentMonth = `${new Date().getMonth() + 1}`;
@@ -26,7 +25,8 @@ function formatedTime(timestamp) {
 
 
 function createTR(attributes, values) {
-  if(attributes.district.toLowerCase() === values.districtValue.toLowerCase().trim() && (attributes.crime_description.toLowerCase().includes(values.crimeValue.toLowerCase().trim()))) {
+  // if(attributes.district.toLowerCase() === values.districtValue.toLowerCase().trim() && (attributes.crime_description.toLowerCase().includes(values.crimeValue.toLowerCase().trim())))
+  if(attributes.crime_description.toLowerCase().includes(values.search.toLowerCase().trim())) {
     const tr = document.createElement('tr');
     const td_crime_description = document.createElement('td');
     const td_district = document.createElement('td');
@@ -59,24 +59,96 @@ function createTR(attributes, values) {
     tr.appendChild(td_reported_block_address)
     tr.appendChild(td_reported_date);
     tr.appendChild(td_reported_time);
-  
+    tr.setAttribute('id', 'field');
     fields.appendChild(tr);
   
     return tr;
-  } else {
-    return false;
+  } else if (attributes.district.toLowerCase() === (values.search.toLowerCase().trim())){
+    const tr = document.createElement('tr');
+    const td_crime_description = document.createElement('td');
+    const td_district = document.createElement('td');
+    const td_reported_block_address = document.createElement('td');
+    const td_reported_date = document.createElement('td');
+    const td_reported_time = document.createElement('td');
+  
+    let text_reported_block_address = null;
+  
+    if(!attributes.reported_block_address) {
+      text_reported_block_address = document.createTextNode('No Block reported');
+    } else {
+      text_reported_block_address = document.createTextNode(attributes.reported_block_address);
+    }
+  
+    const text_crime_description = document.createTextNode(attributes.crime_description);
+    const text_district = document.createTextNode(attributes.district);
+    const text_reported_date = document.createTextNode(formatedDate(attributes.reported_date));
+    const text_reported_time = document.createTextNode(formatedTime(attributes.reported_date));
+  
+  
+    td_crime_description.appendChild(text_crime_description);
+    td_district.appendChild(text_district);
+    td_reported_block_address.appendChild(text_reported_block_address);
+    td_reported_date.appendChild(text_reported_date);
+    td_reported_time.appendChild(text_reported_time);
+    
+    tr.appendChild(td_crime_description);
+    tr.appendChild(td_district);
+    tr.appendChild(td_reported_block_address)
+    tr.appendChild(td_reported_date);
+    tr.appendChild(td_reported_time);
+    tr.setAttribute('id', 'field');
+  
+    fields.appendChild(tr);
+  } else if (!values.search.trim()){
+    const tr = document.createElement('tr');
+    const td_crime_description = document.createElement('td');
+    const td_district = document.createElement('td');
+    const td_reported_block_address = document.createElement('td');
+    const td_reported_date = document.createElement('td');
+    const td_reported_time = document.createElement('td');
+  
+    let text_reported_block_address = null;
+  
+    if(!attributes.reported_block_address) {
+      text_reported_block_address = document.createTextNode('No Block reported');
+    } else {
+      text_reported_block_address = document.createTextNode(attributes.reported_block_address);
+    }
+  
+    const text_crime_description = document.createTextNode(attributes.crime_description);
+    const text_district = document.createTextNode(attributes.district);
+    const text_reported_date = document.createTextNode(formatedDate(attributes.reported_date));
+    const text_reported_time = document.createTextNode(formatedTime(attributes.reported_date));
+  
+  
+    td_crime_description.appendChild(text_crime_description);
+    td_district.appendChild(text_district);
+    td_reported_block_address.appendChild(text_reported_block_address);
+    td_reported_date.appendChild(text_reported_date);
+    td_reported_time.appendChild(text_reported_time);
+    
+    tr.appendChild(td_crime_description);
+    tr.appendChild(td_district);
+    tr.appendChild(td_reported_block_address)
+    tr.appendChild(td_reported_date);
+    tr.appendChild(td_reported_time);
+    tr.setAttribute('id', 'field');
+    fields.appendChild(tr);
   }
 }
 
+const table = document.querySelector('table');
 
 function getData(url, values) {
   fetch(url)
     .then( response => response.json())
     .then( data => {
-      for( let field of data.features) {
-        const attributes = field.attributes;
-        if(createTR(attributes, values)) {
-          fields.appendChild((createTR(attributes, values)));
+      if(fields.children.length === 0) {
+        for( let field of data.features) {
+          const attributes = field.attributes;
+          if(createTR(attributes, values)) {
+            fields.appendChild((createTR(attributes, values)));
+          }
         }
       }
     })
@@ -84,8 +156,8 @@ function getData(url, values) {
 
 searchButton.addEventListener('click', () => {
   const values = {
-    districtValue: searchInput.value,
-    crimeValue: searchCrime.value
+    search: searchInput.value
   };
   getData(newUrl, values);
 });
+
