@@ -1,5 +1,6 @@
 const fields = document.getElementById('fields');
 const searchInput = document.getElementById('district-input');
+const searchCrime = document.getElementById('crime-description');
 const searchButton = document.querySelector('.inputs button');
 
 const currentMonth = `${new Date().getMonth() + 1}`;
@@ -24,9 +25,10 @@ function formatedTime(timestamp) {
 }
 
 
-function createTR(attributes, value) { 
-  console.log(value)
-  if(attributes.district === value) {
+function createTR(attributes, values) { 
+  // attributes.district === values.districtValue && attributes.crime_description === values.crimeValue
+  // Assault/Aggravated
+  if(attributes.district === values.districtValue && (attributes.crime_description.includes(values.crimeValue))) {
 
     const tr = document.createElement('tr');
     const td_crime_description = document.createElement('td');
@@ -70,20 +72,23 @@ function createTR(attributes, value) {
 }
 
 
-function getData(url, value) {
+function getData(url, values) {
   fetch(url)
     .then( response => response.json())
     .then( data => {
       for( let field of data.features) {
         const attributes = field.attributes;
-        if(createTR(attributes, value)) {
-          fields.appendChild((createTR(attributes, value)));
+        if(createTR(attributes, values)) {
+          fields.appendChild((createTR(attributes, values)));
         }
       }
     })
 }
 
 searchButton.addEventListener('click', () => {
-  const value = searchInput.value;
-  getData(newUrl, value);
+  const values = {
+    districtValue: searchInput.value,
+    crimeValue: searchCrime.value
+  };
+  getData(newUrl, values);
 });
