@@ -172,3 +172,11 @@ searchButton.addEventListener('click', () => {
   getData(newUrl, values);
 });
 
+
+
+window.addEventListener('load' , () => {
+  const values = {
+    search: searchInput.value
+  };
+  getData(newUrl, values);
+});
