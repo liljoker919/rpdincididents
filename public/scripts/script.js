@@ -25,11 +25,8 @@ function formatedTime(timestamp) {
 }
 
 
-function createTR(attributes, values) { 
-  // attributes.district === values.districtValue && attributes.crime_description === values.crimeValue
-  // Assault/Aggravated
-  if(attributes.district === values.districtValue && (attributes.crime_description.includes(values.crimeValue))) {
-
+function createTR(attributes, values) {
+  if(attributes.district.toLowerCase() === values.districtValue.toLowerCase().trim() && (attributes.crime_description.toLowerCase().includes(values.crimeValue.toLowerCase().trim()))) {
     const tr = document.createElement('tr');
     const td_crime_description = document.createElement('td');
     const td_district = document.createElement('td');
