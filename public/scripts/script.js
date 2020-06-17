@@ -150,6 +150,17 @@ function getData(url, values) {
             fields.appendChild((createTR(attributes, values)));
           }
         }
+      } else {
+        let allTrs = document.querySelectorAll('#field');
+        for(let i = 0; i < allTrs.length; i++) {
+          fields.removeChild(allTrs[i]);
+        }
+        for( let field of data.features) {
+          const attributes = field.attributes;
+          if(createTR(attributes, values)) {
+            fields.appendChild((createTR(attributes, values)));
+          }
+        }
       }
     })
 }
