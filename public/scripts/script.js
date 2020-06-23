@@ -25,7 +25,6 @@ function formatedTime(timestamp) {
 
 
 function createTR(attributes, values) {
-  // if(attributes.district.toLowerCase() === values.districtValue.toLowerCase().trim() && (attributes.crime_description.toLowerCase().includes(values.crimeValue.toLowerCase().trim())))
   if(attributes.crime_description.toLowerCase().includes(values.search.toLowerCase().trim())) {
     const tr = document.createElement('tr');
     const td_crime_description = document.createElement('td');
