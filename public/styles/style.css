@@ -1,5 +1,7 @@
 body {
-  background-color: rgba(131, 131, 131, 0.8);
+  background-color: #FFFFFF;
+  
+  
 }
 
 #dataView {
@@ -20,19 +22,24 @@ th {
 }
 
 td {
-  color: white;
+  color: black;
   border: 1px solid rgb(153, 153, 153);
   padding: 4px;
 }
 
-tr:hover {
-  background-color: red;
+.page-header {
+  padding: 60px;
+  text-align: center;
+  background: #985E6D;
+  color: white;
+  font-size: 30px;
 }
 
 .inputs {
   font-size: 18px;
   text-align: center;
   margin-bottom: 16px;
+  padding-top: 50px;
 }
 
 .inputs span {
@@ -45,4 +52,14 @@ tr:hover {
   font-weight: bold;
   border-radius: 4px;
   border: none;
+}
+
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #bbb7b7;
+  color: black;
+  text-align: center;
 }
