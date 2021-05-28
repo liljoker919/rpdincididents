@@ -18,9 +18,11 @@ function formatedDate(timestamp) {
 
 function formatedTime(timestamp) {
   const date = new Date(timestamp);
-  const minutes = date.getUTCMinutes();
+  const mins = date.getUTCMinutes();
+  const minutes = mins < 10? '0' + mins : mins;
   const hours = date.getUTCHours();
-  return `${hours}:${minutes}`;
+  const ampm = hours >= 12 ? 'pm' : 'am';
+  return `${hours}:${minutes}${ampm}`;
 }
 
 
