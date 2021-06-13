@@ -4,26 +4,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="public/styles/style.css">
   <title>RPD Incidents</title>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container-fluid p-0 m-0 content">
     <!-- Page Header -->
     <div class="page-header">
       <h1>Raleigh Police Incidents</h1>
     </div>
+    <!-- Ad place -->
+    <div class="ad mt-5"></div>
+    <!-- Ad place -->
     <!-- Search -->
     <div class="inputs">
       <span>Search:</span>
-      <input type="text" id="search">
-      <button>Find</button>
+      <input type="text" id="search" autocomplete="off">
+      <button id="find">Find</button>
     </div>
-    <div id="dataView">
-      <table class="table table-striped">
+    <div id="dataView" class="mb-5 table-responsive">
+      <table class="table table-striped" id="data_table">
         <thead>
           <tr>
             <th>Crime Description</th>
@@ -38,7 +42,7 @@
       </table>
     </div>
     <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start">
+    <footer class="text-center text-lg-start page-footer">
       <!-- Grid container -->
       <div class="container p-4">
         <!--Grid row-->
@@ -61,16 +65,16 @@
 
             <ul class="list-unstyled mb-0">
               <li>
-                <a href="#!" class="text-dark">Link 1</a>
+                <a href="#!">Link 1</a>
               </li>
               <li>
-                <a href="#!" class="text-dark">Link 2</a>
+                <a href="#!">Link 2</a>
               </li>
               <li>
-                <a href="#!" class="text-dark">Link 3</a>
+                <a href="#!">Link 3</a>
               </li>
               <li>
-                <a href="#!" class="text-dark">Link 4</a>
+                <a href="#!">Link 4</a>
               </li>
             </ul>
           </div>
@@ -78,20 +82,20 @@
 
           <!--Grid column-->
           <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-0">Links</h5>
+            <h5 class="text-uppercase">Links</h5>
 
-            <ul class="list-unstyled">
+            <ul class="list-unstyled mb-0">
               <li>
-                <a href="#!" class="text-dark">Link 1</a>
+                <a href="#!">Link 1</a>
               </li>
               <li>
-                <a href="#!" class="text-dark">Link 2</a>
+                <a href="#!">Link 2</a>
               </li>
               <li>
-                <a href="#!" class="text-dark">Link 3</a>
+                <a href="#!">Link 3</a>
               </li>
               <li>
-                <a href="#!" class="text-dark">Link 4</a>
+                <a href="#!">Link 4</a>
               </li>
             </ul>
           </div>
@@ -102,23 +106,24 @@
       <!-- Grid container -->
 
       <!-- Copyright -->
+      
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2020 Copyright:
-        <a class="text-dark" href="http://oakcitysoftwaresolutions.com/">Oak City Software Solutions</a>
+        © <span id="current_year"></span> Copyright:
+        <a href="http://oakcitysoftwaresolutions.com/">Oak City Software Solutions</a>
       </div>
       <!-- Copyright -->
     </footer>
     <!-- Footer -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script src="public/scripts/script.js"></script>
   </div>
 </body>

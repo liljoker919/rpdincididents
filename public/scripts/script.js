@@ -8,6 +8,8 @@ const currentDate = `${new Date().getUTCDate() - 1}`;
  
 const newUrl = `https://services.arcgis.com/v400IkDOw1ad7Yad/arcgis/rest/services/Police_Incidents/FeatureServer/0/query?where=reported_year%20%3E%3D%202020%20AND%20reported_year%20%3C%3D%202022%20AND%20reported_month%20%3E%3D%20${currentMonth}%20AND%20reported_month%20%3C%3D%20${nextMonth}%20AND%20reported_day%20%3E%3D%20${currentDate}%20AND%20reported_day%20%3C%3D%20${currentDate}&outFields=*&outSR=4326&f=json`;
 
+$("#current_year").text(new Date().getFullYear())
+
 function formatedDate(timestamp) {
   const date = new Date(timestamp);
   const year = date.getUTCFullYear();
@@ -17,12 +19,15 @@ function formatedDate(timestamp) {
 }
 
 function formatedTime(timestamp) {
-  const date = new Date(timestamp);
-  const mins = date.getUTCMinutes();
-  const minutes = mins < 10? '0' + mins : mins;
-  const hours = date.getUTCHours();
-  const ampm = hours >= 12 ? 'pm' : 'am';
-  return `${hours}:${minutes}${ampm}`;
+  var date = new Date(timestamp);
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
 }
 
 
@@ -141,7 +146,7 @@ function createTR(attributes, values) {
 const table = document.querySelector('table');
 
 function getData(url, values) {
-  fetch(url)
+  return fetch(url)
     .then( response => response.json())
     .then( data => {
       if(fields.children.length === 0) {
@@ -166,12 +171,12 @@ function getData(url, values) {
     })
 }
 
-searchButton.addEventListener('click', () => {
-  const values = {
-    search: searchInput.value
-  };
-  getData(newUrl, values);
-});
+// searchButton.addEventListener('click', () => {
+//   const values = {
+//     search: searchInput.value
+//   };
+//   getData(newUrl, values);
+// });
 
 
 
@@ -179,5 +184,23 @@ window.addEventListener('load' , () => {
   const values = {
     search: searchInput.value
   };
-  getData(newUrl, values);
+  getData(newUrl, values).then(res => {
+    $(document).ready(function() {
+      var data_table = $('#data_table').DataTable({
+        ordering: false,
+        "oLanguage": {
+          "sLengthMenu": "_MENU_ records",
+        },
+        language: {
+          'paginate': {
+            'previous': '<i class="fas fa-chevron-left"></i>',
+            'next': '<i class="fas fa-chevron-right"></i>'
+          }
+        },
+      });
+      $("#find").click(function(){
+        data_table.search($("#search").val()).draw();
+      });         
+    });
+  });
 });
