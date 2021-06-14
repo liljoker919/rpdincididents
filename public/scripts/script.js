@@ -30,6 +30,10 @@ function formatedTime(timestamp) {
   return strTime;
 }
 
+function changeYearTo2021(date){
+  var year = date.substr(date.length - 4);
+  return date.replace(year, 2021);
+}
 
 function createTR(attributes, values) {
   if(attributes.crime_description.toLowerCase().includes(values.search.toLowerCase().trim())) {
@@ -50,7 +54,7 @@ function createTR(attributes, values) {
   
     const text_crime_description = document.createTextNode(attributes.crime_description);
     const text_district = document.createTextNode(attributes.district);
-    const text_reported_date = document.createTextNode(formatedDate(attributes.reported_date));
+    const text_reported_date = document.createTextNode(changeYearTo2021(formatedDate(attributes.reported_date)));
     const text_reported_time = document.createTextNode(formatedTime(attributes.reported_date));
   
   
@@ -87,7 +91,7 @@ function createTR(attributes, values) {
   
     const text_crime_description = document.createTextNode(attributes.crime_description);
     const text_district = document.createTextNode(attributes.district);
-    const text_reported_date = document.createTextNode(formatedDate(attributes.reported_date));
+    const text_reported_date = document.createTextNode(changeYearTo2021(formatedDate(attributes.reported_date)));
     const text_reported_time = document.createTextNode(formatedTime(attributes.reported_date));
   
   
@@ -123,7 +127,7 @@ function createTR(attributes, values) {
   
     const text_crime_description = document.createTextNode(attributes.crime_description);
     const text_district = document.createTextNode(attributes.district);
-    const text_reported_date = document.createTextNode(formatedDate(attributes.reported_date));
+    const text_reported_date = document.createTextNode(changeYearTo2021(formatedDate(attributes.reported_date)));
     const text_reported_time = document.createTextNode(formatedTime(attributes.reported_date));
   
   
